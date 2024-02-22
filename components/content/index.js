@@ -1,3 +1,3 @@
 export default function Content() {
-  return <div>Content</div>
+  return <div className="background-black">Content</div>
   }
