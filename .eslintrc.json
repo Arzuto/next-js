@@ -18,6 +18,6 @@
         "ObjectPattern": { "multiline": true },
         "ImportDeclaration": "never",
         "ExportDeclaration": { "multiline": true, "minProperties": 3 }}],
-        "beforeStatementContinuationChars": "never"
+        "beforeStatementContinuationChars": "2"
         }
 }

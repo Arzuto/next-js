@@ -8,10 +8,16 @@ export default function Header() {
         <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="profile">Profile</Link>
+        <Link href="/profile">Profile</Link>
       </li>
       <li>
-        <Link href="users">User</Link>
+        <Link href="/users">User</Link>
+      </li>
+      <li>
+        <Link href="/notes">Notes</Link>
+      </li>
+      <li>
+        <Link href="/posts">Posts</Link>
       </li>
     </ul>
   </div>
