@@ -31,7 +31,19 @@ export default function Notes() {
     fetchingData()
   },[])
 
-  console.log('notes =>',notes)
+  const HandleDelete = async (id) => {
+    try {
+     const response = await fetch(
+      `https://paace-f178cafcae7b.nevacloud.io/api/notes/delete/${id}`,
+      {
+       method: "DELETE",
+      })
+      const result = await response.json();
+      if (result?.success) {
+       router.reload();
+      }
+    } catch (error) {}
+   }
  return (
   <>
     <LayoutComponent metaTitle="Notes" metaDescription="Ini adalah halaman Notes">
@@ -52,10 +64,10 @@ export default function Notes() {
                     <Text>{item?.description}</Text>
                   </CardBody>
                   <CardFooter justify="space-between" flexWrap="wrap">
-                     <Button flex="1"variant="ghost">
+                     <Button onClick={() => router.push(`/notes/edit/${item?.id}`)} flex="1" variant="ghost">
                       Edit
                      </Button>
-                     <Button flex="1" colorScheme="red">
+                     <Button onClick={() => HandleDelete(item?.id)} flex="1" colorScheme="red">
                       Delete
                      </Button>
                     </CardFooter>
