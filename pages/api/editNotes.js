@@ -1,14 +1,14 @@
 export default async function handler(req, res) {
   try {
-    const { id } = req.query; 
+    const { id } = req.query;
     const { title, description } = req.body;
 
     const response = await fetch(`https://paace-f178cafcae7b.nevacloud.io/api/notes/update/${id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, description }), 
+      body: JSON.stringify({ title, description }),
     });
 
     if (!response.ok) {

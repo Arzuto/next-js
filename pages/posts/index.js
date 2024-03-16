@@ -1,13 +1,11 @@
-import dynamic from "next/dynamic"
+import dynamic from "next/dynamic";
 
-const LayoutComponent = dynamic(() => import("@/layout"))
+const LayoutComponent = dynamic(() => import("@/layout"));
 
-export default function Posts({posts}) {
+export default function Posts({ posts }) {
+  console.log("Data Posts =>", posts);
 
-  console.log("Data Posts =>",posts)
-
- return (
-  <>
+  return (
     <LayoutComponent metaTitle="Posts" metaDescription="Ini adalah halaman Posts">{
       posts.map((item) => (
         <div>
@@ -15,13 +13,13 @@ export default function Posts({posts}) {
           <p>{item.body}</p>
         </div>
       ))
-    }</LayoutComponent> 
-  </>
- );
+    }
+    </LayoutComponent>
+  );
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts")
-  const posts = await res.json()
-  return { props: { posts } }
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts = await res.json();
+  return { props: { posts } };
 }

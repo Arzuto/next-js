@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic"
+import dynamic from "next/dynamic";
 import {
   Grid,
   GridItem,
@@ -8,20 +8,20 @@ import {
   Button,
   Input,
   Textarea
-} from '@chakra-ui/react'
-import { useState } from "react"
-import { useRouter } from "next/router"
-import { useMutation } from "@/hooks/useMutation"
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { useMutation } from "@/hooks/useMutation";
 
-const LayoutComponent = dynamic(() => import("@/layout"))
+const LayoutComponent = dynamic(() => import("@/layout"));
 
 export default function AddNotes() {
-  const { mutate } =  useMutation()
+  const { mutate } = useMutation();
   const router = useRouter();
-  const [notes,setNotes] = useState({
+  const [notes, setNotes] = useState({
     title: "",
     description: "",
-  });  
+  });
 
   const HandleSubmit = async () => {
     const response = await mutate({
@@ -31,31 +31,32 @@ export default function AddNotes() {
     });
 
     if (response?.success) {
-      router.push('/notes');
+      router.push("/notes");
     }
   };
- return (
-  <>
+  return (
     <LayoutComponent metaTitle="Notes" metaDescription="Ini adalah halaman Tambah Notes">
       <Card margin="5" padding="5">
         <Grid gap="5">
           <Heading>Add Notes</Heading>
           <GridItem>
             <Text>Title</Text>
-            <Input onChange={(event) => setNotes({...notes,title: event.target.value})} type="text"/>
+            <Input onChange={(event) => setNotes({ ...notes, title: event.target.value })} type="text" />
           </GridItem>
           <GridItem>
             <Text>Description</Text>
-            <Textarea onChange={(event) => setNotes({...notes,description: event.target.value})} />
+            <Textarea onChange={(event) => setNotes(
+              { ...notes, description: event.target.value }
+            )}
+            />
           </GridItem>
           <GridItem>
             <Button colorScheme="blue" onClick={() => HandleSubmit()}>Submit</Button>
           </GridItem>
         </Grid>
       </Card>
-    </LayoutComponent> 
-  </>
- )
+    </LayoutComponent>
+  );
 }
 
 // export async function getStaticProps() {

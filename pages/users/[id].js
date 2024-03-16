@@ -1,13 +1,13 @@
-import Layout from "@/layout";
 import { useRouter } from "next/router";
+import Layout from "@/layout";
 
 export default function UsersByName() {
-  const router = useRouter()
-  const { id } = router?.query
+  const router = useRouter();
+  const { id } = router?.query;
 
-  return(
-  <Layout>
-    <p>Users By Name {id}</p>
-  </Layout>
-  )
+  return (
+    <Layout>
+      <p>Users By Name {id}</p>
+    </Layout>
+  );
 }

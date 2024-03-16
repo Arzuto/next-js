@@ -1,38 +1,40 @@
-import { Flex, Stack, Heading, FormControl, Input, Button,useToast } from "@chakra-ui/react"
-import { useState } from "react"
-import { useMutation } from "../hooks/useMutation"
-import Cookies from "js-cookie"
-import { useRouter } from "next/router"
+import {
+  Flex, Stack, Heading, FormControl, Input, Button, useToast
+} from "@chakra-ui/react";
+import { useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import { useMutation } from "../hooks/useMutation";
 
 export default function Login() {
-  const router = useRouter()
-  const toast = useToast()
-  const { mutate } = useMutation()
+  const router = useRouter();
+  const toast = useToast();
+  const { mutate } = useMutation();
   const [payload, setPayload] = useState({
     email: "",
     password: "",
-  })
+  });
 
   const HandleSubmit = async () => {
-    const response = await mutate({ url:"https://paace-f178cafcae7b.nevacloud.io/api/login", payload})
+    const response = await mutate({ url: "https://paace-f178cafcae7b.nevacloud.io/api/login", payload });
     // console.log("response => ", response)
-    if(!response?.success){
+    if (!response?.success) {
       toast({
-        title: 'Login Gagal',
+        title: "Login Gagal",
         description: "email dan password tidak sesuai",
-        status: 'error',
+        status: "error",
         duration: 2000,
         isClosable: true,
-        position: 'top'
-      })
-    }else{
-      Cookies.set("user_token", response?.data?.token,{
+        position: "top"
+      });
+    } else {
+      Cookies.set("user_token", response?.data?.token, {
         expires: new Date(response?.data?.expires_at),
         path: "/"
-      })
-      router.push('/')
+      });
+      router.push("/");
     }
-  }
+  };
 
   return (
     <Flex alignItems="center" justifyContent="center">
@@ -49,4 +51,5 @@ export default function Login() {
         </FormControl>
       </Stack>
     </Flex>
-  )}
+  );
+}
