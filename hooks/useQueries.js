@@ -1,16 +1,18 @@
 import { useState,useCallback, useEffect } from "react"
 
-export const useQueries = ({ prefixUrl = ""} = {}) => {
+export const useQueries = ({ prefixUrl = "", headers= {} } = {}) => {
   const [data, setData] = useState({
     data: null,
     isLoading: true,
     isError: false
   })
 
-  const fetchingData = useCallback(async ({ url="", method="GET" } = {}) => {
+  console.log('headers up =>', headers)
 
+  const fetchingData = useCallback(
+    async ({ url="", method="GET", headers = {} } = {}) => {
     try {
-      const response = await fetch(url, {method})
+      const response = await fetch(url, { method, headers })
       const result = await response.json()
       setData({
         ...data,
@@ -24,11 +26,16 @@ export const useQueries = ({ prefixUrl = ""} = {}) => {
         isLoading:false
       })
     }
-  }, [])
+  },
+  []
+  )
 
   useEffect (() => {
     if (prefixUrl){
-      fetchingData({url: prefixUrl})
+      fetchingData({
+        url: prefixUrl,
+        headers: headers 
+      })
     }
   },[])
 
