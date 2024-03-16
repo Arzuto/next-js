@@ -35,7 +35,7 @@ export default function Header() {
       console.log("gagal log out");
     } else {
       Cookies.remove("user_token");
-      router.push("/");
+      router.push("/login");
     }
   };
 
